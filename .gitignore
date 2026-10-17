@@ -1,0 +1,21 @@
+# 依存関係
+node_modules/
+
+# Antigravity / エージェント作業ディレクトリ
+.antigravity/
+scratch/
+
+# OS固有のファイル
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ログファイル
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# エディタ設定
+.vscode/
+.idea/

@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Katasteria サブタイトルデザイン比較プレビュー</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Doto:wght@600;700&family=Inter:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-2);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .badge-pattern {
+      background: var(--surface-3);
+      color: var(--req);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+    }
+    .preview-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px 28px;
+    }
+    .topbar-mock {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .desc {
+      font-size: 12px;
+      color: var(--text-3);
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <header style="margin-bottom: 8px;">
+    <h1 style="font-size: 18px; font-weight: 500; margin-bottom: 6px;">「Katasteria」（Doto採用）サブタイトル比較</h1>
+    <p style="font-size: 13px; color: var(--text-3);">タイトルにドットフォント「Doto」を採用した際の、サブタイトルの配置・デザイン候補です。</p>
+  </header>
+
+  <!-- パターンA: サブタイトルなし -->
+  <section class="preview-card">
+    <h2><span class="badge-pattern">パターンA</span> サブタイトルなし（ミニマル・タイトルバーのみ）</h2>
+    <div class="topbar-mock">
+      <div class="brand">
+        <svg class="brand-mark" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+          <circle cx="16" cy="16" r="14.5" opacity="0.5" />
+          <circle cx="16" cy="16" r="9.5" />
+          <g opacity="0.5">
+            <path d="M16 1.5v5M16 25.5v5M1.5 16h5M25.5 16h5M5.7 5.7l3.6 3.6M22.7 22.7l3.6 3.6M5.7 26.3l3.6-3.6M22.7 9.3l3.6-3.6" />
+          </g>
+          <circle cx="16" cy="6.5" r="1.6" fill="currentColor" stroke="none" />
+        </svg>
+        <div class="brand-titles">
+          <h1 class="brand-title font-doto">Katasteria</h1>
+        </div>
+        <span class="tag">Prototype</span>
+      </div>
+      <div class="topbar-meta">
+        <span class="meta-item">1900 – 2050</span>
+        <span class="meta-item">東京 · 日本標準時</span>
+      </div>
+    </div>
+    <p class="desc">ヘッダーを最もシンプルにし、Dotoのドットの美しさを際立たせる構成。ツールの説明はブラウザタブ（&lt;title&gt;）や画面内の各セクションで補完します。</p>
+  </section>
+
+  <!-- パターンB: バッジ化（横並び） -->
+  <section class="preview-card">
+    <h2><span class="badge-pattern">パターンB</span> サブタイトルを横のバッジに昇格</h2>
+    <div class="topbar-mock">
+      <div class="brand">
+        <svg class="brand-mark" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+          <circle cx="16" cy="16" r="14.5" opacity="0.5" />
+          <circle cx="16" cy="16" r="9.5" />
+          <g opacity="0.5">
+            <path d="M16 1.5v5M16 25.5v5M1.5 16h5M25.5 16h5M5.7 5.7l3.6 3.6M22.7 22.7l3.6 3.6M5.7 26.3l3.6-3.6M22.7 9.3l3.6-3.6" />
+          </g>
+          <circle cx="16" cy="6.5" r="1.6" fill="currentColor" stroke="none" />
+        </svg>
+        <div class="brand-titles">
+          <h1 class="brand-title font-doto">Katasteria</h1>
+        </div>
+        <span class="tag" style="color: var(--text-2); border-color: var(--line-2); background: var(--surface-2);">逆引きホロスコープ</span>
+        <span class="tag">Prototype</span>
+      </div>
+      <div class="topbar-meta">
+        <span class="meta-item">1900 – 2050</span>
+        <span class="meta-item">東京 · 日本標準時</span>
+      </div>
+    </div>
+    <p class="desc">「逆引きホロスコープ」を独立したピルバッジとして横に並べます。上下に異なるフォントが並ぶ違和感を解消しつつ、ツールの役割が一目で伝わります。</p>
+  </section>
+
+  <!-- パターンC: デジタル英字キャプション（DM Mono） -->
+  <section class="preview-card">
+    <h2><span class="badge-pattern">パターンC</span> デジタル英字キャプション（DM Mono / 等幅大文字）</h2>
+    <div class="topbar-mock">
+      <div class="brand">
+        <svg class="brand-mark" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+          <circle cx="16" cy="16" r="14.5" opacity="0.5" />
+          <circle cx="16" cy="16" r="9.5" />
+          <g opacity="0.5">
+            <path d="M16 1.5v5M16 25.5v5M1.5 16h5M25.5 16h5M5.7 5.7l3.6 3.6M22.7 22.7l3.6 3.6M5.7 26.3l3.6-3.6M22.7 9.3l3.6-3.6" />
+          </g>
+          <circle cx="16" cy="6.5" r="1.6" fill="currentColor" stroke="none" />
+        </svg>
+        <div class="brand-titles">
+          <h1 class="brand-title font-doto">Katasteria</h1>
+          <p class="brand-subtitle sub-en">REVERSE HOROSCOPE</p>
+        </div>
+        <span class="tag">Prototype</span>
+      </div>
+      <div class="topbar-meta">
+        <span class="meta-item">1900 – 2050</span>
+        <span class="meta-item">東京 · 日本標準時</span>
+      </div>
+    </div>
+    <p class="desc">サブタイトルを「REVERSE HOROSCOPE」とし、DM Monoの極小等幅フォント（字間広め）で配置。Dotoのデジタル感・観測端末感と美しく統一されます。</p>
+  </section>
+
+  <!-- パターンD: 極小・静かな日本語キャプション -->
+  <section class="preview-card">
+    <h2><span class="badge-pattern">パターンD</span> 極小・控えめな日本語キャプション</h2>
+    <div class="topbar-mock">
+      <div class="brand">
+        <svg class="brand-mark" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+          <circle cx="16" cy="16" r="14.5" opacity="0.5" />
+          <circle cx="16" cy="16" r="9.5" />
+          <g opacity="0.5">
+            <path d="M16 1.5v5M16 25.5v5M1.5 16h5M25.5 16h5M5.7 5.7l3.6 3.6M22.7 22.7l3.6 3.6M5.7 26.3l3.6-3.6M22.7 9.3l3.6-3.6" />
+          </g>
+          <circle cx="16" cy="6.5" r="1.6" fill="currentColor" stroke="none" />
+        </svg>
+        <div class="brand-titles">
+          <h1 class="brand-title font-doto">Katasteria</h1>
+          <p class="brand-subtitle sub-subtle">星の配置から日時を探す</p>
+        </div>
+        <span class="tag">Prototype</span>
+      </div>
+      <div class="topbar-meta">
+        <span class="meta-item">1900 – 2050</span>
+        <span class="meta-item">東京 · 日本標準時</span>
+      </div>
+    </div>
+    <p class="desc">日本語テキストを「星の配置から日時を探す」として文字サイズを10pxまで落とし、コントラストを抑えて空気のように添えるスタイルです。</p>
+  </section>
+</body>
+</html>

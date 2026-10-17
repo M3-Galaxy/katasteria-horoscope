@@ -1,0 +1,14 @@
+{
+  "name": "reverse-horoscope",
+  "version": "0.1.0",
+  "private": true,
+  "description": "星の配置（条件）から日時を逆引きするホロスコープ検索ツールのプロトタイプ",
+  "scripts": {
+    "generate": "node tools/generate-ephemeris.mjs",
+    "verify": "node tools/verify.mjs",
+    "vendor": "node -e \"require('fs').copyFileSync('node_modules/astronomy-engine/astronomy.browser.min.js','js/vendor/astronomy.browser.min.js')\""
+  },
+  "devDependencies": {
+    "astronomy-engine": "^2.1.19"
+  }
+}

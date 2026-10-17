@@ -1,0 +1,770 @@
+/* =============================================================
+   Katasteria — 鑑定シート作成モーダル ＆ 横長カルテスタイル
+   テーマ: 
+     - 📜 Parchment (黄昏の羊皮紙 / Cardo × しっぽり明朝)
+     - ✨ Hesperus  (宵の明星 / DM Mono × Noto Sans JP)
+   ============================================================= */
+
+/* ---------- モーダル基本枠 ---------- */
+.sheet-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms var(--ease);
+}
+
+.sheet-modal.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sheet-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 10, 14, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.sheet-modal-dialog {
+  position: relative;
+  z-index: 1;
+  width: 95vw;
+  max-width: 1360px;
+  height: 92vh;
+  max-height: 880px;
+  background: var(--surface);
+  border: 1px solid var(--line-2);
+  border-radius: 12px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ---------- モーダルヘッダー ---------- */
+.sheet-modal-header {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-2);
+}
+
+.sheet-modal-title-group {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.sheet-modal-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+/* テーマ切り替え */
+.sheet-theme-switch {
+  display: inline-flex;
+  align-items: center;
+  background: var(--bg);
+  border: 1px solid var(--line-2);
+  border-radius: 6px;
+  padding: 2px;
+  gap: 2px;
+}
+
+.btn-sheet-theme {
+  font-size: 11.5px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  color: var(--text-3);
+  transition: all var(--dur) var(--ease);
+}
+
+.btn-sheet-theme:hover {
+  color: var(--text);
+}
+
+.btn-sheet-theme.active {
+  background: var(--surface-3);
+  color: var(--text);
+  font-weight: 500;
+  border: 1px solid var(--line-2);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.sheet-modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sheet-modal-actions .btn-primary {
+  background: var(--req);
+  color: var(--bg);
+  font-weight: 600;
+  font-size: 12px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  transition: opacity var(--dur) var(--ease);
+}
+
+.sheet-modal-actions .btn-primary:hover {
+  opacity: 0.9;
+}
+
+.btn-icon-close {
+  font-size: 16px;
+  color: var(--text-3);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all var(--dur) var(--ease);
+}
+
+.btn-icon-close:hover {
+  color: var(--text);
+  background: var(--surface-3);
+}
+
+/* ---------- モーダルボディ（2カラム） ---------- */
+.sheet-modal-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* 左側：エディタパネル */
+.sheet-editor-panel {
+  padding: 20px;
+  border-right: 1px solid var(--line);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: var(--surface);
+}
+
+.sheet-form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sheet-section-hint {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-3);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 4px;
+}
+
+.sheet-input-title {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--surface-2);
+  border: 1px solid var(--line-2);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text);
+  outline: none;
+  transition: border-color var(--dur) var(--ease);
+}
+
+.sheet-input-catch {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--surface-2);
+  border: 1px solid var(--line-2);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 12px;
+  color: var(--text-2);
+  outline: none;
+  transition: border-color var(--dur) var(--ease);
+}
+
+.sheet-input-title:focus,
+.sheet-input-catch:focus,
+.sheet-textarea:focus {
+  border-color: var(--req);
+}
+
+.sheet-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sheet-tag-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sheet-tag-bracket {
+  color: var(--text-3);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.sheet-input-tag {
+  background: var(--surface-2);
+  border: 1px solid var(--line-2);
+  border-radius: 4px;
+  padding: 3px 8px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text);
+  width: 76px;
+  text-align: center;
+  outline: none;
+  transition: border-color var(--dur) var(--ease);
+}
+
+.sheet-input-tag:focus {
+  border-color: var(--req);
+}
+
+.sheet-tag-hint {
+  font-size: 11px;
+  color: var(--text-3);
+  margin-left: 4px;
+  letter-spacing: 0.04em;
+}
+
+.sheet-field-label {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--text-2);
+  letter-spacing: 0.04em;
+}
+
+.sheet-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--surface-2);
+  border: 1px solid var(--line-2);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 12px;
+  font-family: inherit;
+  line-height: 1.5;
+  color: var(--text);
+  resize: vertical;
+  min-height: 56px;
+  outline: none;
+  transition: border-color var(--dur) var(--ease);
+}
+
+/* 右側：プレビューパネル */
+.sheet-preview-panel {
+  padding: 24px;
+  background: #0a0c10;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sheet-canvas-wrap {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =============================================================
+   横長カルテカード本体
+   ============================================================= */
+.sheet-card {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 24px 28px;
+  border-radius: 8px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+
+/* カードヘッダー */
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid currentColor;
+}
+
+.card-titles {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.25;
+}
+
+.card-catch {
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+  opacity: 0.85;
+}
+
+.card-meta {
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  opacity: 0.75;
+  text-align: right;
+  line-height: 1.4;
+}
+
+/* カードボディ（メイン2列） */
+.card-body {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+/* 左列：円図 */
+.card-chart-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-chart-frame {
+  width: 270px;
+  height: 270px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-chart-frame svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.card-chart-angles {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  opacity: 0.8;
+  display: flex;
+  gap: 12px;
+}
+
+/* 右列：データ・グリッド・解釈 */
+.card-info-col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* コア・シグネチャー ＆ 特筆アスペクト */
+.card-signatures {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.card-sig-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.card-sig-role {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+  text-transform: uppercase;
+}
+
+.card-sig-body {
+  font-size: 12.5px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.card-sig-sabian {
+  font-size: 10px;
+  line-height: 1.35;
+  opacity: 0.8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 下部行（グリッド ＆ 解釈ノート） */
+.card-bottom-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.card-sub-head {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  opacity: 0.75;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+}
+
+/* アスペクトグリッド縮小表示 */
+.card-asp-table-wrap {
+  overflow: hidden;
+}
+
+.card-asp-table {
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.card-asp-table th,
+.card-asp-table td {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  max-width: 20px;
+  box-sizing: border-box;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0;
+  font-size: 9.5px;
+  border: 1px solid currentColor;
+}
+
+.card-asp-table .asp-cell-diag {
+  font-size: 10px;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* 解釈ノート */
+.card-notes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card-note-item {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.card-note-tag {
+  font-size: 9.5px;
+  font-weight: 600;
+  padding: 1px 5px;
+  border-radius: 3px;
+  border: 1px solid currentColor;
+  opacity: 0.8;
+  flex: none;
+}
+
+.card-note-text {
+  font-size: 11px;
+  line-height: 1.5;
+  margin: 0;
+  opacity: 0.9;
+  word-break: break-word;
+}
+
+/* フッター */
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px solid currentColor;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+}
+
+.card-glyphs {
+  font-size: 12px;
+  letter-spacing: 0.15em;
+}
+
+/* =============================================================
+   テーマ 1: 📜 Parchment (黄昏の羊皮紙)
+   Cardo × しっぽり明朝 / 生成り・アンティークゴールド・バーガンディ
+   ============================================================= */
+.theme-parchment {
+  background: #f7f4ea;
+  color: #2b241e;
+  font-family: "Cardo", "Shippori Mincho", "Noto Serif JP", serif;
+  border: 2px solid #bda376;
+  position: relative;
+}
+
+/* 二重飾り罫線 */
+.theme-parchment::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(189, 163, 118, 0.5);
+  pointer-events: none;
+  border-radius: 5px;
+}
+
+.theme-parchment .card-header {
+  border-bottom-color: rgba(189, 163, 118, 0.6);
+}
+
+.theme-parchment .card-title {
+  color: #1f1a15;
+  font-size: 20px;
+  letter-spacing: 0.06em;
+}
+
+.theme-parchment .card-catch {
+  color: #635343;
+  font-style: italic;
+}
+
+.theme-parchment .card-meta {
+  color: #635343;
+}
+
+.theme-parchment .card-signatures {
+  background: rgba(189, 163, 118, 0.12);
+  border: 1px solid rgba(189, 163, 118, 0.35);
+}
+
+.theme-parchment .card-sig-role {
+  color: #8c2a3e; /* バーガンディ */
+}
+
+.theme-parchment .card-sig-body {
+  color: #1f1a15;
+}
+
+.theme-parchment .card-sub-head {
+  color: #8c2a3e;
+  border-bottom-color: rgba(140, 42, 62, 0.3);
+}
+
+.theme-parchment .card-asp-table th,
+.theme-parchment .card-asp-table td {
+  border-color: rgba(189, 163, 118, 0.5);
+}
+
+.theme-parchment .card-asp-table .asp-cell-diag {
+  background: rgba(189, 163, 118, 0.2);
+  color: #1f1a15;
+}
+
+.theme-parchment .card-asp-table .asp-cell.is-soft {
+  color: #1e5c94;
+  background: rgba(30, 92, 148, 0.08);
+}
+
+.theme-parchment .card-asp-table .asp-cell.is-hard {
+  color: #a62a2a;
+  background: rgba(166, 42, 42, 0.08);
+}
+
+.theme-parchment .card-asp-table .asp-cell.is-conj {
+  color: #9c6c14;
+  background: rgba(156, 108, 20, 0.1);
+}
+
+.theme-parchment .card-note-tag {
+  border-color: rgba(140, 42, 62, 0.4);
+  color: #8c2a3e;
+  background: rgba(140, 42, 62, 0.06);
+}
+
+.theme-parchment .card-footer {
+  border-top-color: rgba(189, 163, 118, 0.6);
+  color: #635343;
+}
+
+/* 星屑背景レイヤー（宵の明星用） */
+.card-bg-stardust {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: inherit;
+  display: none;
+  z-index: 0;
+}
+
+.card-bg-stardust svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* =============================================================
+   テーマ 2: ✨ Hesperus (宵の明星 / 星光の静謐)
+   DM Mono × Kiwi Maru / 群青インディゴ・星光シルバー・シャンパンゴールド
+   ============================================================= */
+.theme-hesperus {
+  background-color: #0c1322;
+  background-image: linear-gradient(145deg, #050811 0%, #0c1322 50%, #151a30 100%);
+  color: #edf2f8;
+  font-family: "DM Mono", "Kiwi Maru", serif;
+  border: 1px solid rgba(190, 215, 235, 0.22);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), 0 0 32px rgba(190, 215, 235, 0.06);
+  position: relative;
+}
+
+.theme-hesperus .card-bg-stardust {
+  display: block;
+}
+
+.theme-hesperus .card-header {
+  border-bottom-color: rgba(190, 215, 235, 0.15);
+}
+
+.theme-hesperus .card-title {
+  color: #eef5fc;
+  font-family: "Kiwi Maru", serif;
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: 0.06em;
+  text-shadow: 0 0 14px rgba(238, 245, 252, 0.25);
+}
+
+.theme-hesperus .card-catch {
+  color: #a3c2de;
+  font-family: "Kiwi Maru", serif;
+  font-weight: 300;
+  font-style: italic; /* 詩行のイタリック指定 */
+  letter-spacing: 0.05em;
+}
+
+.theme-hesperus .card-meta {
+  color: #728299;
+}
+
+.theme-hesperus .card-signatures {
+  background: rgba(190, 215, 235, 0.04);
+  border: 1px solid rgba(190, 215, 235, 0.12);
+}
+
+.theme-hesperus .card-sig-role {
+  color: #a3c2de; /* 見出し色を詩行色（星光アイスブルー）に統一 */
+}
+
+.theme-hesperus .card-sig-body {
+  color: #eef5fc;
+}
+
+.theme-hesperus .card-sig-sabian {
+  color: #a8b8cc;
+  font-family: "Kiwi Maru", serif;
+  font-weight: 400;
+}
+
+.theme-hesperus .card-sub-head {
+  color: #a3c2de; /* 見出し色を統一 */
+  border-bottom-color: rgba(163, 194, 222, 0.22);
+}
+
+.theme-hesperus .card-asp-table th,
+.theme-hesperus .card-asp-table td {
+  border-color: rgba(190, 215, 235, 0.12);
+}
+
+.theme-hesperus .card-asp-table .asp-cell-diag {
+  background: rgba(190, 215, 235, 0.08);
+  color: #eef5fc;
+}
+
+.theme-hesperus .card-asp-table .asp-cell.is-soft {
+  color: #72b3dc;
+  background: rgba(114, 179, 220, 0.12);
+}
+
+.theme-hesperus .card-asp-table .asp-cell.is-hard {
+  color: #d6707c;
+  background: rgba(214, 112, 124, 0.12);
+}
+
+.theme-hesperus .card-asp-table .asp-cell.is-conj {
+  color: #e8d79b;
+  background: rgba(232, 215, 155, 0.12);
+}
+
+.theme-hesperus .card-note-tag {
+  border-color: rgba(163, 194, 222, 0.35);
+  color: #a3c2de; /* タグ色を統一 */
+  background: rgba(163, 194, 222, 0.08);
+}
+
+.theme-hesperus .card-note-text {
+  color: #d8e2ed;
+  font-family: "Kiwi Maru", serif;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.theme-hesperus .card-footer {
+  border-top-color: rgba(190, 215, 235, 0.15);
+  color: #728299;
+}
+
+/* ---------- レスポンシブ ---------- */
+@media (max-width: 1024px) {
+  .sheet-modal-body {
+    grid-template-columns: 1fr;
+    overflow-y: auto;
+  }
+  .sheet-editor-panel {
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+    max-height: 280px;
+  }
+  .card-body {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Katasteria-逆引きホロスコープ｜星の配置から日時を探す</title>
+  <meta name="description" content="天体のサイン配置を条件に指定すると、1200〜2100年（約900年間）の中から該当する日時の期間を探し出す逆引きホロスコープ検索ツールのプロトタイプです。">
+  <meta name="theme-color" content="#121418">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Doto:wght@400;600;700&family=DotGothic16&family=Inter:wght@300;400;500&family=Kiwi+Maru:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&family=Shippori+Mincho:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=7">
+  <link rel="stylesheet" href="css/sheet.css?v=5">
+</head>
+
+<body>
+  <div class="loading" id="loading">天体データを読み込んでいます…</div>
+
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <!-- ロゴ：黄道12分割の円 -->
+        <svg class="brand-mark" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1"
+          aria-hidden="true">
+          <circle cx="16" cy="16" r="14.5" opacity="0.5" />
+          <circle cx="16" cy="16" r="9.5" />
+          <g opacity="0.5">
+            <path
+              d="M16 1.5v5M16 25.5v5M1.5 16h5M25.5 16h5M5.7 5.7l3.6 3.6M22.7 22.7l3.6 3.6M5.7 26.3l3.6-3.6M22.7 9.3l3.6-3.6" />
+          </g>
+          <circle cx="16" cy="6.5" r="1.6" fill="currentColor" stroke="none" />
+        </svg>
+        <h1 class="brand-title" id="brand-title">Katasteria</h1>
+        <span class="brand-badge">逆引きホロスコープ</span>
+        <span class="tag">Prototype</span>
+      </div>
+      <div class="topbar-meta">
+        <div class="meta-control">
+          <label class="meta-label" for="select-chunk">年代</label>
+          <select class="meta-select" id="select-chunk" aria-label="探索年代"></select>
+        </div>
+        <div class="meta-control">
+          <label class="meta-label" for="select-location">観測地</label>
+          <select class="meta-select" id="select-location" aria-label="観測地"></select>
+        </div>
+        <div class="meta-control">
+          <label class="meta-label" for="select-tz">標準時</label>
+          <select class="meta-select" id="select-tz" aria-label="標準時"></select>
+        </div>
+        <button class="btn-ghost" id="btn-clear-all" type="button">条件をすべてクリア</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <!-- 条件 -->
+      <section class="panel conditions" aria-labelledby="cond-title">
+        <div class="panel-head">
+          <div class="panel-title-wrap">
+            <h2 id="cond-title">条件</h2>
+            <div class="info-wrap">
+              <button type="button" class="info-btn" id="btn-cond-info" aria-label="条件の指定方法" aria-expanded="false" aria-controls="cond-info-popover">
+                <svg class="info-icon" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                  <circle cx="8" cy="8" r="6.5" />
+                  <line x1="8" y1="7.2" x2="8" y2="11.5" />
+                  <circle cx="8" cy="4.7" r="0.8" fill="currentColor" stroke="none" />
+                </svg>
+              </button>
+              <div class="info-popover" id="cond-info-popover" role="tooltip">
+                <strong>条件の指定方法について</strong>
+                <p>天体を開いてサインを選びます。</p>
+                <p>各サインの数字は、ほかの必須条件と組み合わせたときに残る期間の数です。0 のサインは同時に成立しないため選べません。</p>
+              </div>
+            </div>
+          </div>
+          <div class="legend">
+            <span><i class="dot req"></i>必須</span>
+            <span><i class="dot pref"></i>できれば</span>
+          </div>
+        </div>
+        <ul class="body-list" id="body-list"></ul>
+
+        <!-- アスペクト条件 -->
+        <div class="aspect-section" id="aspect-section">
+          <div class="aspect-head">
+            <div class="aspect-title-wrap">
+              <h3 class="aspect-title">アスペクト条件</h3>
+              <div class="aspect-info-wrap">
+                <button type="button" class="aspect-info-btn" id="btn-aspect-info" aria-label="アスペクト探索の注意点" aria-expanded="false" aria-controls="aspect-info-popover">
+                  <svg class="aspect-info-icon" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                    <circle cx="8" cy="8" r="6.5" />
+                    <line x1="8" y1="7.2" x2="8" y2="11.5" />
+                    <circle cx="8" cy="4.7" r="0.8" fill="currentColor" stroke="none" />
+                  </svg>
+                </button>
+                <div class="aspect-info-popover" id="aspect-info-popover" role="tooltip">
+                  <strong>アスペクト単体での探索について</strong>
+                  <p>サイン条件を指定しない場合、全期間（1900〜2050年）からアスペクトを探索します。</p>
+                  <p>木星や土星など外惑星同士なら高速ですが、<strong>月</strong>など公転の速い天体を含む場合は計算に数秒かかることがあります。</p>
+                </div>
+              </div>
+            </div>
+            <button class="btn-ghost" id="btn-add-aspect" type="button">＋ アスペクトを追加</button>
+          </div>
+          <ul class="aspect-list" id="aspect-list"></ul>
+        </div>
+      </section>
+
+      <!-- 結果 -->
+      <section class="panel results" aria-labelledby="result-title">
+        <div class="panel-head">
+          <h2 id="result-title">候補</h2>
+          <div class="seg" role="group" aria-label="並び順">
+            <button type="button" id="sort-score" data-sort="score" aria-pressed="true">一致度順</button>
+            <button type="button" id="sort-time" data-sort="time" aria-pressed="false">年代順</button>
+          </div>
+        </div>
+        <div class="summary" id="summary"></div>
+        <ol class="result-list" id="result-list"></ol>
+        <div class="list-footer" id="list-footer" hidden>
+          <button class="btn-ghost" id="btn-more" type="button">さらに表示</button>
+        </div>
+      </section>
+
+      <!-- 配置の確認 -->
+      <aside class="panel detail" id="detail" aria-labelledby="detail-title"></aside>
+    </main>
+
+    <footer class="footer">
+      天体位置は astronomy-engine による計算値です（NASA/JPL Horizons との照合で誤差 1 分角未満を確認）。
+      時刻は日本標準時（UTC+9）固定で、1948〜1951年のサマータイムは考慮していません。
+    </footer>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- 鑑定シート作成モーダル -->
+  <div class="sheet-modal" id="sheet-modal" aria-hidden="true">
+    <div class="sheet-modal-backdrop" id="sheet-backdrop"></div>
+    <div class="sheet-modal-dialog">
+      <!-- モーダルヘッダー -->
+      <div class="sheet-modal-header">
+        <div class="sheet-modal-title-group">
+          <h2 class="sheet-modal-title">✦ 鑑定シート作成</h2>
+          <div class="sheet-theme-switch" role="group" aria-label="テーマ切り替え">
+            <button type="button" class="btn-sheet-theme active" data-theme="parchment" id="theme-btn-parchment">
+              黄昏の羊皮紙
+            </button>
+            <button type="button" class="btn-sheet-theme" data-theme="hesperus" id="theme-btn-hesperus">
+              宵の明星
+            </button>
+          </div>
+        </div>
+        <div class="sheet-modal-actions">
+          <button type="button" class="btn-ghost" id="btn-sheet-copy">テキストをコピー</button>
+          <button type="button" class="btn-primary" id="btn-sheet-export">PNG画像を保存</button>
+          <button type="button" class="btn-icon-close" id="btn-sheet-close" aria-label="閉じる">✕</button>
+        </div>
+      </div>
+
+      <!-- モーダルボディ（2カラム） -->
+      <div class="sheet-modal-body">
+        <!-- 左：エディタフォーム -->
+        <div class="sheet-editor-panel">
+          <div class="sheet-form-section">
+            <span class="sheet-section-hint">チャートの表題と詩的な要約</span>
+            <input type="text" class="sheet-input-title" id="input-sheet-title"
+              placeholder="チャートのタイトル（例：夕暮れの対話 - Herma:Hesperus -）" maxlength="60">
+            <input type="text" class="sheet-input-catch" id="input-sheet-catch"
+              placeholder="1行のキャッチコピー（例：言葉の光が地平線に沈み、秘密の聖域に火が灯る刻）" maxlength="100">
+          </div>
+
+          <div class="sheet-form-section">
+            <span class="sheet-section-hint">解釈コメント（ラベルと本文）</span>
+            <div class="sheet-field">
+              <div class="sheet-tag-input-wrap">
+                <span class="sheet-tag-bracket">【</span>
+                <input type="text" class="sheet-input-tag" id="input-sheet-tag-scene" value="風景" maxlength="6"
+                  placeholder="ラベル" aria-label="第1視点のラベル">
+                <span class="sheet-tag-bracket">】</span>
+                <span class="sheet-tag-hint">視点 1</span>
+              </div>
+              <textarea class="sheet-textarea" id="input-sheet-scene" rows="3"
+                placeholder="このチャートが描く情景や空気感、二人の舞台設定など…"></textarea>
+            </div>
+            <div class="sheet-field">
+              <div class="sheet-tag-input-wrap">
+                <span class="sheet-tag-bracket">【</span>
+                <input type="text" class="sheet-input-tag" id="input-sheet-tag-dynamic" value="結び目" maxlength="6"
+                  placeholder="ラベル" aria-label="第2視点のラベル">
+                <span class="sheet-tag-bracket">】</span>
+                <span class="sheet-tag-hint">視点 2</span>
+              </div>
+              <textarea class="sheet-textarea" id="input-sheet-dynamic" rows="3"
+                placeholder="対話のリズム、言葉と感情のやり取り、お互いに及ぼす引力…"></textarea>
+            </div>
+            <div class="sheet-field">
+              <div class="sheet-tag-input-wrap">
+                <span class="sheet-tag-bracket">【</span>
+                <input type="text" class="sheet-input-tag" id="input-sheet-tag-vow" value="深層" maxlength="6"
+                  placeholder="ラベル" aria-label="第3視点のラベル">
+                <span class="sheet-tag-bracket">】</span>
+                <span class="sheet-tag-hint">視点 3</span>
+              </div>
+              <textarea class="sheet-textarea" id="input-sheet-vow" rows="3"
+                placeholder="制約の中で紡がれる信頼、触れられないからこそ永遠なもの…"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右：ライブプレビュー（横長カルテ） -->
+        <div class="sheet-preview-panel">
+          <div class="sheet-canvas-wrap">
+            <div class="sheet-card theme-parchment" id="sheet-card">
+              <!-- 星屑レイヤー（DOM内に実体配置することで画像保存時にも確実に描画） -->
+              <div class="card-bg-stardust" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" fill="none">
+                  <circle cx="765" cy="28" r="1.2" fill="#cce9fa" opacity="0.75"/>
+                  <circle cx="745" cy="42" r="1.6" fill="#9bd3f2" opacity="0.85"/>
+                  <circle cx="778" cy="52" r="0.8" fill="#e3f4fd" opacity="0.6"/>
+                  <circle cx="728" cy="24" r="0.9" fill="#cce9fa" opacity="0.7"/>
+                  <circle cx="712" cy="48" r="1.4" fill="#9bd3f2" opacity="0.75"/>
+                  <circle cx="688" cy="28" r="0.7" fill="#e3f4fd" opacity="0.55"/>
+                  <circle cx="758" cy="78" r="1.1" fill="#cce9fa" opacity="0.7"/>
+                  <circle cx="782" cy="98" r="0.9" fill="#9bd3f2" opacity="0.6"/>
+                  <circle cx="736" cy="68" r="0.7" fill="#e3f4fd" opacity="0.5"/>
+                  <circle cx="702" cy="75" r="1" fill="#cce9fa" opacity="0.6"/>
+                  <circle cx="38" cy="448" r="1.4" fill="#9bd3f2" opacity="0.8"/>
+                  <circle cx="56" cy="435" r="1.6" fill="#cce9fa" opacity="0.85"/>
+                  <circle cx="22" cy="422" r="0.8" fill="#e3f4fd" opacity="0.6"/>
+                  <circle cx="72" cy="455" r="0.9" fill="#9bd3f2" opacity="0.7"/>
+                  <circle cx="90" cy="440" r="1.2" fill="#cce9fa" opacity="0.7"/>
+                  <circle cx="30" cy="402" r="0.8" fill="#e3f4fd" opacity="0.55"/>
+                  <circle cx="115" cy="460" r="0.7" fill="#9bd3f2" opacity="0.55"/>
+                  <circle cx="64" cy="415" r="0.7" fill="#e3f4fd" opacity="0.5"/>
+                  <circle cx="102" cy="452" r="1" fill="#cce9fa" opacity="0.6"/>
+                  <circle cx="788" cy="220" r="0.9" fill="#9bd3f2" opacity="0.5"/>
+                  <circle cx="14" cy="180" r="0.9" fill="#cce9fa" opacity="0.5"/>
+                  <circle cx="415" cy="12" r="0.8" fill="#e3f4fd" opacity="0.45"/>
+                  <circle cx="435" cy="468" r="0.8" fill="#9bd3f2" opacity="0.45"/>
+                  <circle cx="785" cy="340" r="0.7" fill="#cce9fa" opacity="0.4"/>
+                  <circle cx="18" cy="310" r="0.7" fill="#9bd3f2" opacity="0.4"/>
+                </svg>
+              </div>
+
+              <!-- シートヘッダー -->
+              <div class="card-header">
+                <div class="card-titles">
+                  <div class="card-title" id="card-display-title">夕暮れの対話 - Herma:Hesperus -</div>
+                  <div class="card-catch" id="card-display-catch">言葉の光が地平線に沈み、秘密の聖域に火が灯る刻</div>
+                </div>
+                <div class="card-meta" id="card-display-meta">
+                  1989.06.17 18:45 JST · 東京 (35°40'N, 139°46'E)
+                </div>
+              </div>
+
+              <!-- シートメイングリッド -->
+              <div class="card-body">
+                <!-- 左列：ホロスコープ円図 -->
+                <div class="card-chart-col">
+                  <div class="card-chart-frame" id="card-chart-frame"></div>
+                  <div class="card-chart-angles" id="card-chart-angles"></div>
+                </div>
+
+                <!-- 右列：データ＆解釈 -->
+                <div class="card-info-col">
+                  <!-- 上部：コア・シグネチャー ＆ 特筆アスペクト -->
+                  <div class="card-signatures" id="card-signatures"></div>
+
+                  <!-- 下部：2分割（左：アスペクトグリッド、右：解釈コメント） -->
+                  <div class="card-bottom-row">
+                    <div class="card-asp-grid-col">
+                      <div class="card-sub-head">アスペクト幾何学</div>
+                      <div class="card-asp-table-wrap">
+                        <table class="card-asp-table" id="card-asp-table"></table>
+                      </div>
+                    </div>
+                    <div class="card-notes-col">
+                      <div class="card-sub-head">鑑定所見 · 解釈ノート</div>
+                      <div class="card-notes-list">
+                        <div class="card-note-item">
+                          <span class="card-note-tag" id="card-tag-scene">風景</span>
+                          <p class="card-note-text" id="card-text-scene"></p>
+                        </div>
+                        <div class="card-note-item">
+                          <span class="card-note-tag" id="card-tag-dynamic">結び目</span>
+                          <p class="card-note-text" id="card-text-dynamic"></p>
+                        </div>
+                        <div class="card-note-item">
+                          <span class="card-note-tag" id="card-tag-vow">深層</span>
+                          <p class="card-note-text" id="card-text-vow"></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- シートフッター -->
+              <div class="card-footer">
+                <span class="card-credit">Katasteria Ephemeris Engine · Reverse Horoscope</span>
+                <span class="card-glyphs">☉ ☽ ☿ ♀ ♂ ♃ ♄ ♅ ♆ ♇</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/vendor/astronomy.browser.min.js"></script>
+  <script src="js/vendor/html2canvas.min.js"></script>
+  <script src="js/data/ephemeris-1800-2100.js"></script>
+  <script src="js/data/ephemeris-1500-1799.js"></script>
+  <script src="js/data/ephemeris-1200-1499.js"></script>
+  <script src="js/data/sabian-data.js"></script>
+  <script src="js/constants.js?v=5"></script>
+  <script src="js/astro-math.js?v=2"></script>
+  <script src="js/engine.js?v=2"></script>
+  <script src="js/astro.js?v=3"></script>
+  <script src="js/chart.js?v=3"></script>
+  <script src="js/aspects.js?v=3"></script>
+  <script src="js/export.js?v=1"></script>
+  <script src="js/sheet.js?v=5"></script>
+  <script src="js/app.js?v=7"></script>
+</body>
+
+</html>

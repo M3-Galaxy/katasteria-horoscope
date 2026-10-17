@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>宵の明星（Hesperus）情緒的カラーパレット比較プレビュー</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Doto:wght@600;700&family=DotGothic16&family=Kiwi+Maru:wght@300;400;500&family=Inter:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/sheet.css">
+  <style>
+    body {
+      background: #05070b;
+      color: #edf0f7;
+      font-family: var(--font);
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .header-info h1 {
+      font-size: 19px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: #f0e6f6;
+    }
+    .header-info p {
+      font-size: 13px;
+      color: #8f8ba0;
+      line-height: 1.6;
+    }
+    .card-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .card-wrap h2 {
+      font-size: 14.5px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0;
+    }
+    .card-wrap .desc {
+      font-size: 12px;
+      color: #8c899c;
+      margin-bottom: 4px;
+    }
+    .badge {
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    /* 共通フォント設定 */
+    .font-kiwi-style {
+      font-family: "DM Mono", "Kiwi Maru", serif !important;
+    }
+    .font-kiwi-style .card-title {
+      font-family: "Kiwi Maru", serif !important;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+    }
+    .font-kiwi-style .card-catch {
+      font-family: "Kiwi Maru", serif !important;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+    }
+    .font-kiwi-style .card-note-text,
+    .font-kiwi-style .card-sig-sabian {
+      font-family: "Kiwi Maru", serif !important;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+
+    .font-dot-style {
+      font-family: "DM Mono", "DotGothic16", monospace !important;
+    }
+    .font-dot-style .card-title {
+      font-family: "Doto", "DotGothic16", monospace !important;
+      letter-spacing: 0.08em;
+    }
+    .font-dot-style .card-catch,
+    .font-dot-style .card-note-text,
+    .font-dot-style .card-sig-sabian {
+      font-family: "DotGothic16", monospace !important;
+      line-height: 1.6;
+    }
+
+    /* ========================================================
+       配色 A: 【薄暮の茜（Twilight Rose）】
+       黄昏の地平線に沈む茜色と菫色の残照。息を呑むような切ない情緒。
+       ======================================================== */
+    .palette-twilight-rose {
+      background: linear-gradient(145deg, #080b18 0%, #161126 45%, #2a1428 100%) !important;
+      border: 1px solid rgba(216, 164, 184, 0.22) !important;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 32px rgba(216, 164, 184, 0.06) !important;
+    }
+    .palette-twilight-rose .card-header {
+      border-bottom-color: rgba(216, 164, 184, 0.16) !important;
+    }
+    .palette-twilight-rose .card-title {
+      color: #f7eedb !important;
+      text-shadow: 0 0 14px rgba(247, 238, 219, 0.2) !important;
+    }
+    .palette-twilight-rose .card-catch {
+      color: #d8a4b8 !important; /* ダスティローズ */
+      font-style: italic;
+    }
+    .palette-twilight-rose .card-meta {
+      color: #8c8096 !important;
+    }
+    .palette-twilight-rose .card-signatures {
+      background: rgba(216, 164, 184, 0.04) !important;
+      border: 1px solid rgba(216, 164, 184, 0.12) !important;
+    }
+    .palette-twilight-rose .card-sig-role {
+      color: #e5a4b8 !important;
+    }
+    .palette-twilight-rose .card-sig-body {
+      color: #f7eedb !important;
+    }
+    .palette-twilight-rose .card-sig-sabian {
+      color: #bfaec2 !important;
+    }
+    .palette-twilight-rose .card-sub-head {
+      color: #e5a4b8 !important;
+      border-bottom-color: rgba(229, 164, 184, 0.25) !important;
+    }
+    .palette-twilight-rose .card-asp-table th,
+    .palette-twilight-rose .card-asp-table td {
+      border-color: rgba(216, 164, 184, 0.12) !important;
+    }
+    .palette-twilight-rose .card-asp-table .asp-cell-diag {
+      background: rgba(216, 164, 184, 0.08) !important;
+      color: #f7eedb !important;
+    }
+    .palette-twilight-rose .card-asp-table .asp-cell.is-soft {
+      color: #82b0d2 !important;
+      background: rgba(130, 176, 210, 0.12) !important;
+    }
+    .palette-twilight-rose .card-asp-table .asp-cell.is-hard {
+      color: #d67a90 !important;
+      background: rgba(214, 122, 144, 0.14) !important;
+    }
+    .palette-twilight-rose .card-asp-table .asp-cell.is-conj {
+      color: #e8c87e !important;
+      background: rgba(232, 200, 126, 0.12) !important;
+    }
+    .palette-twilight-rose .card-note-tag {
+      border-color: rgba(216, 164, 184, 0.3) !important;
+      color: #e5a4b8 !important;
+      background: rgba(216, 164, 184, 0.08) !important;
+    }
+    .palette-twilight-rose .card-note-text {
+      color: #ded7e5 !important;
+    }
+    .palette-twilight-rose .card-footer {
+      border-top-color: rgba(216, 164, 184, 0.16) !important;
+      color: #8c8096 !important;
+    }
+
+    /* ========================================================
+       配色 B: 【星光の静謐（Celestial Silver）】
+       群青のミッドナイトブルーと、凍てつく星光シルバーゴールド。
+       ======================================================== */
+    .palette-celestial-silver {
+      background: linear-gradient(145deg, #050811 0%, #0c1322 50%, #151a30 100%) !important;
+      border: 1px solid rgba(190, 215, 235, 0.2) !important;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 32px rgba(190, 215, 235, 0.05) !important;
+    }
+    .palette-celestial-silver .card-header {
+      border-bottom-color: rgba(190, 215, 235, 0.15) !important;
+    }
+    .palette-celestial-silver .card-title {
+      color: #eef5fc !important;
+      text-shadow: 0 0 14px rgba(238, 245, 252, 0.25) !important;
+    }
+    .palette-celestial-silver .card-catch {
+      color: #a3c2de !important;
+    }
+    .palette-celestial-silver .card-meta {
+      color: #728299 !important;
+    }
+    .palette-celestial-silver .card-signatures {
+      background: rgba(190, 215, 235, 0.04) !important;
+      border: 1px solid rgba(190, 215, 235, 0.12) !important;
+    }
+    .palette-celestial-silver .card-sig-role {
+      color: #e8d79b !important; /* ペールゴールド */
+    }
+    .palette-celestial-silver .card-sig-body {
+      color: #eef5fc !important;
+    }
+    .palette-celestial-silver .card-sig-sabian {
+      color: #a8b8cc !important;
+    }
+    .palette-celestial-silver .card-sub-head {
+      color: #e8d79b !important;
+      border-bottom-color: rgba(232, 215, 155, 0.25) !important;
+    }
+    .palette-celestial-silver .card-asp-table th,
+    .palette-celestial-silver .card-asp-table td {
+      border-color: rgba(190, 215, 235, 0.12) !important;
+    }
+    .palette-celestial-silver .card-asp-table .asp-cell-diag {
+      background: rgba(190, 215, 235, 0.08) !important;
+      color: #eef5fc !important;
+    }
+    .palette-celestial-silver .card-asp-table .asp-cell.is-soft {
+      color: #72b3dc !important;
+      background: rgba(114, 179, 220, 0.12) !important;
+    }
+    .palette-celestial-silver .card-asp-table .asp-cell.is-hard {
+      color: #d6707c !important;
+      background: rgba(214, 112, 124, 0.12) !important;
+    }
+    .palette-celestial-silver .card-asp-table .asp-cell.is-conj {
+      color: #e8d79b !important;
+      background: rgba(232, 215, 155, 0.12) !important;
+    }
+    .palette-celestial-silver .card-note-tag {
+      border-color: rgba(232, 215, 155, 0.3) !important;
+      color: #e8d79b !important;
+      background: rgba(232, 215, 155, 0.08) !important;
+    }
+    .palette-celestial-silver .card-note-text {
+      color: #d8e2ed !important;
+    }
+    .palette-celestial-silver .card-footer {
+      border-top-color: rgba(190, 215, 235, 0.15) !important;
+      color: #728299 !important;
+    }
+
+    /* ========================================================
+       配色 C: 【夜空のアンバー（Starlight Amber）】
+       漆黒と、星の光・琥珀のあたたかみ。ドットと融合する柔らかな電脳感。
+       ======================================================== */
+    .palette-starlight-amber {
+      background: linear-gradient(145deg, #07090f 0%, #111420 50%, #1e1927 100%) !important;
+      border: 1px solid rgba(235, 195, 120, 0.2) !important;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 32px rgba(235, 195, 120, 0.05) !important;
+    }
+    .palette-starlight-amber .card-header {
+      border-bottom-color: rgba(235, 195, 120, 0.15) !important;
+    }
+    .palette-starlight-amber .card-title {
+      color: #f7eedb !important;
+      text-shadow: 0 0 14px rgba(247, 238, 219, 0.25) !important;
+    }
+    .palette-starlight-amber .card-catch {
+      color: #ebd196 !important;
+    }
+    .palette-starlight-amber .card-meta {
+      color: #82808f !important;
+    }
+    .palette-starlight-amber .card-signatures {
+      background: rgba(235, 195, 120, 0.04) !important;
+      border: 1px solid rgba(235, 195, 120, 0.12) !important;
+    }
+    .palette-starlight-amber .card-sig-role {
+      color: #f0c36e !important;
+    }
+    .palette-starlight-amber .card-sig-body {
+      color: #f7eedb !important;
+    }
+    .palette-starlight-amber .card-sig-sabian {
+      color: #b5ad9e !important;
+    }
+    .palette-starlight-amber .card-sub-head {
+      color: #f0c36e !important;
+      border-bottom-color: rgba(240, 195, 110, 0.25) !important;
+    }
+    .palette-starlight-amber .card-asp-table th,
+    .palette-starlight-amber .card-asp-table td {
+      border-color: rgba(235, 195, 120, 0.12) !important;
+    }
+    .palette-starlight-amber .card-asp-table .asp-cell-diag {
+      background: rgba(235, 195, 120, 0.08) !important;
+      color: #f7eedb !important;
+    }
+    .palette-starlight-amber .card-asp-table .asp-cell.is-soft {
+      color: #72aedb !important;
+      background: rgba(114, 174, 219, 0.12) !important;
+    }
+    .palette-starlight-amber .card-asp-table .asp-cell.is-hard {
+      color: #d66d7e !important;
+      background: rgba(214, 109, 126, 0.12) !important;
+    }
+    .palette-starlight-amber .card-asp-table .asp-cell.is-conj {
+      color: #f0c36e !important;
+      background: rgba(240, 195, 110, 0.14) !important;
+    }
+    .palette-starlight-amber .card-note-tag {
+      border-color: rgba(240, 195, 110, 0.3) !important;
+      color: #f0c36e !important;
+      background: rgba(240, 195, 110, 0.08) !important;
+    }
+    .palette-starlight-amber .card-note-text {
+      color: #e5ded0 !important;
+    }
+    .palette-starlight-amber .card-footer {
+      border-top-color: rgba(235, 195, 120, 0.15) !important;
+      color: #82808f !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="header-info">
+    <h1>✨ 宵の明星（Hesperus）情緒的カラーパレット比較</h1>
+    <p>「視認性優先のUIダッシュボード感」から脱却し、黄昏の空の移ろいや星光の美しさを宿した3つの情緒的な配色です。</p>
+  </div>
+
+  <!-- 配色A: 薄暮の茜（Twilight Rose）× Kiwi Maru -->
+  <div class="card-wrap">
+    <h2><span class="badge" style="background:rgba(216,164,184,0.2);color:#e5a4b8;">配色A</span> 薄暮の茜（Twilight Rose） × Kiwi Maru</h2>
+    <div class="desc">群青の夜空から地平線の茜色へと沈みゆくグラデーション。切なくロマンチックな黄昏の情緒。</div>
+    <div class="sheet-card palette-twilight-rose font-kiwi-style">
+      <div class="card-header">
+        <div class="card-titles">
+          <div class="card-title">夕暮れの対話 - Herma:Hesperus -</div>
+          <div class="card-catch">言葉の光が地平線に沈み、秘密の聖域に火が灯る刻</div>
+        </div>
+        <div class="card-meta">1989.06.17 18:45 JST · 東京 (35°40'N, 139°46'E)</div>
+      </div>
+      <div class="card-body">
+        <div class="card-chart-col">
+          <div class="card-chart-frame">
+            <svg viewBox="0 0 270 270" width="100%" height="auto">
+              <circle cx="135" cy="135" r="126" fill="#141122" stroke="rgba(216,164,184,0.2)" stroke-width="1"/>
+              <circle cx="135" cy="135" r="102" fill="#0d0b18" stroke="rgba(216,164,184,0.12)" stroke-width="1"/>
+              <line x1="20" y1="135" x2="250" y2="135" stroke="#d8a4b8" stroke-width="1.2" opacity="0.6"/>
+              <line x1="135" y1="20" x2="135" y2="250" stroke="#8c8096" stroke-width="0.8" opacity="0.4"/>
+              <text x="135" y="139" text-anchor="middle" fill="#f7eedb" font-size="11" font-family="'Cardo', serif" letter-spacing="0.1em">HESPERUS</text>
+            </svg>
+          </div>
+          <div class="card-chart-angles">
+            <span>ASC: 射手座 24°</span>
+            <span>MC: 乙女座 10°</span>
+          </div>
+        </div>
+        <div class="card-info-col">
+          <div class="card-signatures">
+            <div class="card-sig-item">
+              <span class="card-sig-role">ASC / 世界への窓</span>
+              <span class="card-sig-body"><span class="glyph">⚑</span> 射手座 24°</span>
+              <span class="card-sig-sabian">「家のドアにとまっている青い鳥」</span>
+            </div>
+            <div class="card-sig-item">
+              <span class="card-sig-role">Sun / 意思・核</span>
+              <span class="card-sig-body"><span class="glyph">☉</span> 双子座 26° (第7室)</span>
+              <span class="card-sig-sabian">「森から出てくるジプシー」</span>
+            </div>
+            <div class="card-sig-item">
+              <span class="card-sig-role">Moon / 心・体温</span>
+              <span class="card-sig-body"><span class="glyph">☽</span> 射手座 03° (第12室)</span>
+              <span class="card-sig-sabian">「チェスをする二人の男」</span>
+            </div>
+          </div>
+          <div class="card-bottom-row">
+            <div class="card-asp-grid-col">
+              <div class="card-sub-head">アスペクト幾何学</div>
+              <div class="card-asp-table-wrap">
+                <table class="card-asp-table">
+                  <tr><th class="asp-cell-diag">☉</th></tr>
+                  <tr><td class="asp-cell is-hit is-hard">☍</td><th class="asp-cell-diag">☽</th></tr>
+                  <tr><td class="asp-cell"></td><td class="asp-cell is-hit is-soft">△</td><th class="asp-cell-diag">☿</th></tr>
+                  <tr><td class="asp-cell is-hit is-conj">☌</td><td class="asp-cell"></td><td class="asp-cell"></td><th class="asp-cell-diag">♀</th></tr>
+                </table>
+              </div>
+            </div>
+            <div class="card-notes-col">
+              <div class="card-sub-head">鑑定所見 · 解釈ノート</div>
+              <div class="card-notes-list">
+                <div class="card-note-item">
+                  <span class="card-note-tag">風景</span>
+                  <p class="card-note-text">黄昏の茜色が薄紺の夜へと溶けゆく窓辺。静まり返った部屋の中で、言葉の余白と沈黙が静かに交差する情景。</p>
+                </div>
+                <div class="card-note-item">
+                  <span class="card-note-tag">結び目</span>
+                  <p class="card-note-text">知性と衝動、言葉と体温の対峙。言葉を重ねるほどに距離が縮まり、同時に触れてはならない不可侵の領域を確かめ合う引力。</p>
+                </div>
+                <div class="card-note-item">
+                  <span class="card-note-tag">深層</span>
+                  <p class="card-note-text">制約と理性の境界線の中で紡がれる静かな誓い。決して形骸には囚われず、星の配置のように永遠に記憶へ刻まれる絆。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="card-credit">Katasteria Ephemeris Engine · Reverse Horoscope</span>
+        <span class="card-glyphs">☉ ☽ ☿ ♀ ♂ ♃ ♄ ♅ ♆ ♇</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 配色B: 星光の静謐（Celestial Silver）× Kiwi Maru -->
+  <div class="card-wrap">
+    <h2><span class="badge" style="background:rgba(190,215,235,0.2);color:#a3c2de;">配色B</span> 星光の静謐（Celestial Silver） × Kiwi Maru</h2>
+    <div class="desc">凍てつく星空の透明感と、静かな星明かりのシルバー＆シャンパンゴールド。澄んだ知性と静寂。</div>
+    <div class="sheet-card palette-celestial-silver font-kiwi-style">
+      <div class="card-header">
+        <div class="card-titles">
+          <div class="card-title">夕暮れの対話 - Herma:Hesperus -</div>
+          <div class="card-catch">言葉の光が地平線に沈み、秘密の聖域に火が灯る刻</div>
+        </div>
+        <div class="card-meta">1989.06.17 18:45 JST · 東京 (35°40'N, 139°46'E)</div>
+      </div>
+      <div class="card-body">
+        <div class="card-chart-col">
+          <div class="card-chart-frame">
+            <svg viewBox="0 0 270 270" width="100%" height="auto">
+              <circle cx="135" cy="135" r="126" fill="#0d1424" stroke="rgba(190,215,235,0.2)" stroke-width="1"/>
+              <circle cx="135" cy="135" r="102" fill="#060912" stroke="rgba(190,215,235,0.12)" stroke-width="1"/>
+              <line x1="20" y1="135" x2="250" y2="135" stroke="#e8d79b" stroke-width="1.2" opacity="0.6"/>
+              <line x1="135" y1="20" x2="135" y2="250" stroke="#728299" stroke-width="0.8" opacity="0.4"/>
+              <text x="135" y="139" text-anchor="middle" fill="#eef5fc" font-size="11" font-family="'Cardo', serif" letter-spacing="0.1em">HESPERUS</text>
+            </svg>
+          </div>
+          <div class="card-chart-angles">
+            <span>ASC: 射手座 24°</span>
+            <span>MC: 乙女座 10°</span>
+          </div>
+        </div>
+        <div class="card-info-col">
+          <div class="card-signatures">
+            <div class="card-sig-item">
+              <span class="card-sig-role">ASC / 世界への窓</span>
+              <span class="card-sig-body"><span class="glyph">⚑</span> 射手座 24°</span>
+              <span class="card-sig-sabian">「家のドアにとまっている青い鳥」</span>
+            </div>
+            <div class="card-sig-item">
+              <span class="card-sig-role">Sun / 意思・核</span>
+              <span class="card-sig-body"><span class="glyph">☉</span> 双子座 26° (第7室)</span>
+              <span class="card-sig-sabian">「森から出てくるジプシー」</span>
+            </div>
+            <div class="card-sig-item">
+              <span class="card-sig-role">Moon / 心・体温</span>
+              <span class="card-sig-body"><span class="glyph">☽</span> 射手座 03° (第12室)</span>
+              <span class="card-sig-sabian">「チェスをする二人の男」</span>
+            </div>
+          </div>
+          <div class="card-bottom-row">
+            <div class="card-asp-grid-col">
+              <div class="card-sub-head">アスペクト幾何学</div>
+              <div class="card-asp-table-wrap">
+                <table class="card-asp-table">
+                  <tr><th class="asp-cell-diag">☉</th></tr>
+                  <tr><td class="asp-cell is-hit is-hard">☍</td><th class="asp-cell-diag">☽</th></tr>
+                  <tr><td class="asp-cell"></td><td class="asp-cell is-hit is-soft">△</td><th class="asp-cell-diag">☿</th></tr>
+                  <tr><td class="asp-cell is-hit is-conj">☌</td><td class="asp-cell"></td><td class="asp-cell"></td><th class="asp-cell-diag">♀</th></tr>
+                </table>
+              </div>
+            </div>
+            <div class="card-notes-col">
+              <div class="card-sub-head">鑑定所見 · 解釈ノート</div>
+              <div class="card-notes-list">
+                <div class="card-note-item">
+                  <span class="card-note-tag">風景</span>
+                  <p class="card-note-text">黄昏の茜色が薄紺の夜へと溶けゆく窓辺。静まり返った部屋の中で、言葉の余白と沈黙が静かに交差する情景。</p>
+                </div>
+                <div class="card-note-item">
+                  <span class="card-note-tag">結び目</span>
+                  <p class="card-note-text">知性と衝動、言葉と体温の対峙。言葉を重ねるほどに距離が縮まり、同時に触れてはならない不可侵の領域を確かめ合う引力。</p>
+                </div>
+                <div class="card-note-item">
+                  <span class="card-note-tag">深層</span>
+                  <p class="card-note-text">制約と理性の境界線の中で紡がれる静かな誓い。決して形骸には囚われず、星の配置のように永遠に記憶へ刻まれる絆。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="card-credit">Katasteria Ephemeris Engine · Reverse Horoscope</span>
+        <span class="card-glyphs">☉ ☽ ☿ ♀ ♂ ♃ ♄ ♅ ♆ ♇</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 配色C: 夜空のアンバー（Starlight Amber）× DotGothic16 -->
+  <div class="card-wrap">
+    <h2><span class="badge" style="background:rgba(240,195,110,0.2);color:#f0c36e;">配色C</span> 夜空のアンバー（Starlight Amber） × DotGothic16</h2>
+    <div class="desc">漆黒の夜に浮かぶ星明かり・琥珀色の光彩。ドットのデジタル感がありつつも温かみのある電脳観測端末。</div>
+    <div class="sheet-card palette-starlight-amber font-dot-style">
+      <div class="card-header">
+        <div class="card-titles">
+          <div class="card-title">夕暮れの対話 - Herma:Hesperus -</div>
+          <div class="card-catch">言葉の光が地平線に沈み、秘密の聖域に火が灯る刻</div>
+        </div>
+        <div class="card-meta">1989.06.17 18:45 JST · 東京 (35°40'N, 139°46'E)</div>
+      </div>
+      <div class="card-body">
+        <div class="card-chart-col">
+          <div class="card-chart-frame">
+            <svg viewBox="0 0 270 270" width="100%" height="auto">
+              <circle cx="135" cy="135" r="126" fill="#141829" stroke="rgba(235,195,120,0.2)" stroke-width="1"/>
+              <circle cx="135" cy="135" r="102" fill="#0d1120" stroke="rgba(235,195,120,0.12)" stroke-width="1"/>
+              <line x1="20" y1="135" x2="250" y2="135" stroke="#f0c36e" stroke-width="1.2" opacity="0.6"/>
+              <line x1="135" y1="20" x2="135" y2="250" stroke="#82808f" stroke-width="0.8" opacity="0.4"/>
+              <text x="135" y="139" text-anchor="middle" fill="#f7eedb" font-size="11" font-family="'DM Mono', monospace" letter-spacing="0.1em">HESPERUS</text>
+            </svg>
+          </div>
+          <div class="card-chart-angles">
+            <span>ASC: 射手座 24°</span>
+            <span>MC: 乙女座 10°</span>
+          </div>
+        </div>
+        <div class="card-info-col">
+          <div class="card-signatures">
+            <div class="card-sig-item">
+              <span class="card-sig-role">ASC / 世界への窓</span>
+              <span class="card-sig-body"><span class="glyph">⚑</span> 射手座 24°</span>
+              <span class="card-sig-sabian">「家のドアにとまっている青い鳥」</span>
+            </div>
+            <div class="card-sig-item">
+              <span class="card-sig-role">Sun / 意思・核</span>
+              <span class="card-sig-body"><span class="glyph">☉</span> 双子座 26° (第7室)</span>
+              <span class="card-sig-sabian">「森から出てくるジプシー」</span>
+            </div>
+            <div class="card-sig-item">
+              <span class="card-sig-role">Moon / 心・体温</span>
+              <span class="card-sig-body"><span class="glyph">☽</span> 射手座 03° (第12室)</span>
+              <span class="card-sig-sabian">「チェスをする二人の男」</span>
+            </div>
+          </div>
+          <div class="card-bottom-row">
+            <div class="card-asp-grid-col">
+              <div class="card-sub-head">アスペクト幾何学</div>
+              <div class="card-asp-table-wrap">
+                <table class="card-asp-table">
+                  <tr><th class="asp-cell-diag">☉</th></tr>
+                  <tr><td class="asp-cell is-hit is-hard">☍</td><th class="asp-cell-diag">☽</th></tr>
+                  <tr><td class="asp-cell"></td><td class="asp-cell is-hit is-soft">△</td><th class="asp-cell-diag">☿</th></tr>
+                  <tr><td class="asp-cell is-hit is-conj">☌</td><td class="asp-cell"></td><td class="asp-cell"></td><th class="asp-cell-diag">♀</th></tr>
+                </table>
+              </div>
+            </div>
+            <div class="card-notes-col">
+              <div class="card-sub-head">鑑定所見 · 解釈ノート</div>
+              <div class="card-notes-list">
+                <div class="card-note-item">
+                  <span class="card-note-tag">風景</span>
+                  <p class="card-note-text">黄昏の茜色が薄紺の夜へと溶けゆく窓辺。静まり返った部屋の中で、言葉の余白と沈黙が静かに交差する情景。</p>
+                </div>
+                <div class="card-note-item">
+                  <span class="card-note-tag">結び目</span>
+                  <p class="card-note-text">知性と衝動、言葉と体温の対峙。言葉を重ねるほどに距離が縮まり、同時に触れてはならない不可侵の領域を確かめ合う引力。</p>
+                </div>
+                <div class="card-note-item">
+                  <span class="card-note-tag">深層</span>
+                  <p class="card-note-text">制約と理性の境界線の中で紡がれる静かな誓い。決して形骸には囚われず、星の配置のように永遠に記憶へ刻まれる絆。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="card-credit">Katasteria Ephemeris Engine · Reverse Horoscope</span>
+        <span class="card-glyphs">☉ ☽ ☿ ♀ ♂ ♃ ♄ ♅ ♆ ♇</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

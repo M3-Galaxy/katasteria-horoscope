@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>宵の明星（Hesperus）日本語フォント比較プレビュー</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Doto:wght@600;700&family=DotGothic16&family=Kiwi+Maru:wght@300;400;500&family=Inter:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/sheet.css">
+  <style>
+    body {
+      background: #080a0f;
+      color: #edf0f7;
+      font-family: var(--font);
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .header-info h1 {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .header-info p {
+      font-size: 13px;
+      color: #828fa8;
+    }
+    .card-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .card-wrap h2 {
+      font-size: 14px;
+      font-weight: 500;
+      color: #6ee7b7;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .badge {
+      background: rgba(110, 231, 183, 0.15);
+      color: #6ee7b7;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+    }
+    /* フォントスタイル指定 */
+    .font-dotgothic {
+      font-family: "DM Mono", "DotGothic16", monospace !important;
+    }
+    .font-dotgothic .card-title {
+      font-family: "Doto", "DotGothic16", monospace !important;
+      letter-spacing: 0.08em;
+    }
+    .font-dotgothic .card-catch,
+    .font-dotgothic .card-note-text,
+    .font-dotgothic .card-sig-sabian {
+      font-family: "DotGothic16", monospace !important;
+      line-height: 1.6;
+    }
+
+    .font-kiwimaru {
+      font-family: "DM Mono", "Kiwi Maru", serif !important;
+    }
+    .font-kiwimaru .card-title {
+      font-family: "Kiwi Maru", serif !important;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+    }
+    .font-kiwimaru .card-catch {
+      font-family: "Kiwi Maru", serif !important;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+    }
+    .font-kiwimaru .card-note-text,
+    .font-kiwimaru .card-sig-sabian {
+      font-family: "Kiwi Maru", serif !important;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+  </style>
+</head>
+<body>
+  <div class="header-info">
+    <h1>✨ 宵の明星（Hesperus）日本語フォント比較プレビュー</h1>
+    <p>「もっとデジタルな質感かつ繊細な感じ」に向けて、<strong>DotGothic16</strong> と <strong>Kiwi Maru</strong> の2種類を比較します。</p>
+  </div>
+
+  <!-- 案1: DotGothic16 -->
+  <div class="card-wrap">
+    <h2><span class="badge">案1</span> DotGothic16（ドットゴシック16） — 電子観測端末・ドットマトリクス</h2>
+    <div class="sheet-card theme-hesperus font-dotgothic">
+      <div class="card-header">
+        <div class="card-titles">
+          <div class="card-title">夕暮れの対話 - Herma:Hesperus -</div>
+          <div class="card-catch">言葉の光が地平線に沈み、秘密の聖域に火が灯る刻</div>
+        </div>
+        <div class="card-meta">
+          1989.06.17 18:45 JST · 東京 (35°40'N, 139°46'E)
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-chart-col">
+          <div class="card-chart-frame">
+            <svg viewBox="0 0 270 270" width="100%" height="auto">
+              <circle cx="135" cy="135" r="126" fill="#141829" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+              <circle cx="135" cy="135" r="102" fill="#0d1120" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+              <line x1="20" y1="135" x2="250" y2="135" stroke="#6ee7b7" stroke-width="1.2" opacity="0.6"/>
+              <line x1="135" y1="20" x2="135" y2="250" stroke="#828fa8" stroke-width="0.8" opacity="0.4"/>
+              <text x="135" y="139" text-anchor="middle" fill="#6ee7b7" font-size="12" font-family="'DM Mono', monospace">KATASTERIA</text>
+            </svg>
+          </div>
+          <div class="card-chart-angles">
+            <span>ASC: 射手座 24°</span>
+            <span>MC: 乙女座 10°</span>
+          </div>
+        </div>
+        <div class="card-info-col">
+          <div class="card-signatures">
+            <div class="card-sig-item">
+              <span class="card-sig-role">ASC / 世界への窓</span>
+              <span class="card-sig-body"><span class="glyph">⚑</span> 射手座 24°</span>
+              <span class="card-sig-sabian">「家のドアにとまっている青い鳥」</span>
+            </div>
+            <div class="card-sig-item">
+              <span class="card-sig-role">Sun / 意思・核</span>
+              <span class="card-sig-body"><span class="glyph">☉</span> 双子座 26° (第7室)</span>
+              <span class="card-sig-sabian">「森から出てくるジプシー」</span>
+            </div>
+            <div class="card-sig-item">
+              <span class="card-sig-role">Moon / 心・体温</span>
+              <span class="card-sig-body"><span class="glyph">☽</span> 射手座 03° (第12室)</span>
+              <span class="card-sig-sabian">「チェスをする二人の男」</span>
+            </div>
+          </div>
+          <div class="card-bottom-row">
+            <div class="card-asp-grid-col">
+              <div class="card-sub-head">アスペクト幾何学</div>
+              <div class="card-asp-table-wrap">
+                <table class="card-asp-table">
+                  <tr><th class="asp-cell-diag">☉</th></tr>
+                  <tr><td class="asp-cell is-hit is-hard">☍</td><th class="asp-cell-diag">☽</th></tr>
+                  <tr><td class="asp-cell"></td><td class="asp-cell is-hit is-soft">△</td><th class="asp-cell-diag">☿</th></tr>
+                  <tr><td class="asp-cell is-hit is-conj">☌</td><td class="asp-cell"></td><td class="asp-cell"></td><th class="asp-cell-diag">♀</th></tr>
+                </table>
+              </div>
+            </div>
+            <div class="card-notes-col">
+              <div class="card-sub-head">鑑定所見 · 解釈ノート</div>
+              <div class="card-notes-list">
+                <div class="card-note-item">
+                  <span class="card-note-tag">風景</span>
+                  <p class="card-note-text">黄昏の茜色が薄紺の夜へと溶けゆく窓辺。静まり返った部屋の中で、言葉の余白と沈黙が静かに交差する情景。</p>
+                </div>
+                <div class="card-note-item">
+                  <span class="card-note-tag">結び目</span>
+                  <p class="card-note-text">知性と衝動、言葉と体温の対峙。言葉を重ねるほどに距離が縮まり、同時に触れてはならない不可侵の領域を確かめ合う引力。</p>
+                </div>
+                <div class="card-note-item">
+                  <span class="card-note-tag">深層</span>
+                  <p class="card-note-text">制約と理性の境界線の中で紡がれる静かな誓い。決して形骸には囚われず、星の配置のように永遠に記憶へ刻まれる絆。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="card-credit">Katasteria Ephemeris Engine · Reverse Horoscope</span>
+        <span class="card-glyphs">☉ ☽ ☿ ♀ ♂ ♃ ♄ ♅ ♆ ♇</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 案2: Kiwi Maru -->
+  <div class="card-wrap">
+    <h2><span class="badge">案2</span> Kiwi Maru（キウイ丸） — 詩的・繊細・静謐なエモーショナル</h2>
+    <div class="sheet-card theme-hesperus font-kiwimaru">
+      <div class="card-header">
+        <div class="card-titles">
+          <div class="card-title">夕暮れの対話 - Herma:Hesperus -</div>
+          <div class="card-catch">言葉の光が地平線に沈み、秘密の聖域に火が灯る刻</div>
+        </div>
+        <div class="card-meta">
+          1989.06.17 18:45 JST · 東京 (35°40'N, 139°46'E)
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-chart-col">
+          <div class="card-chart-frame">
+            <svg viewBox="0 0 270 270" width="100%" height="auto">
+              <circle cx="135" cy="135" r="126" fill="#141829" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+              <circle cx="135" cy="135" r="102" fill="#0d1120" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+              <line x1="20" y1="135" x2="250" y2="135" stroke="#6ee7b7" stroke-width="1.2" opacity="0.6"/>
+              <line x1="135" y1="20" x2="135" y2="250" stroke="#828fa8" stroke-width="0.8" opacity="0.4"/>
+              <text x="135" y="139" text-anchor="middle" fill="#6ee7b7" font-size="12" font-family="'DM Mono', monospace">KATASTERIA</text>
+            </svg>
+          </div>
+          <div class="card-chart-angles">
+            <span>ASC: 射手座 24°</span>
+            <span>MC: 乙女座 10°</span>
+          </div>
+        </div>
+        <div class="card-info-col">
+          <div class="card-signatures">
+            <div class="card-sig-item">
+              <span class="card-sig-role">ASC / 世界への窓</span>
+              <span class="card-sig-body"><span class="glyph">⚑</span> 射手座 24°</span>
+              <span class="card-sig-sabian">「家のドアにとまっている青い鳥」</span>
+            </div>
+            <div class="card-sig-item">
+              <span class="card-sig-role">Sun / 意思・核</span>
+              <span class="card-sig-body"><span class="glyph">☉</span> 双子座 26° (第7室)</span>
+              <span class="card-sig-sabian">「森から出てくるジプシー」</span>
+            </div>
+            <div class="card-sig-item">
+              <span class="card-sig-role">Moon / 心・体温</span>
+              <span class="card-sig-body"><span class="glyph">☽</span> 射手座 03° (第12室)</span>
+              <span class="card-sig-sabian">「チェスをする二人の男」</span>
+            </div>
+          </div>
+          <div class="card-bottom-row">
+            <div class="card-asp-grid-col">
+              <div class="card-sub-head">アスペクト幾何学</div>
+              <div class="card-asp-table-wrap">
+                <table class="card-asp-table">
+                  <tr><th class="asp-cell-diag">☉</th></tr>
+                  <tr><td class="asp-cell is-hit is-hard">☍</td><th class="asp-cell-diag">☽</th></tr>
+                  <tr><td class="asp-cell"></td><td class="asp-cell is-hit is-soft">△</td><th class="asp-cell-diag">☿</th></tr>
+                  <tr><td class="asp-cell is-hit is-conj">☌</td><td class="asp-cell"></td><td class="asp-cell"></td><th class="asp-cell-diag">♀</th></tr>
+                </table>
+              </div>
+            </div>
+            <div class="card-notes-col">
+              <div class="card-sub-head">鑑定所見 · 解釈ノート</div>
+              <div class="card-notes-list">
+                <div class="card-note-item">
+                  <span class="card-note-tag">風景</span>
+                  <p class="card-note-text">黄昏の茜色が薄紺の夜へと溶けゆく窓辺。静まり返った部屋の中で、言葉の余白と沈黙が静かに交差する情景。</p>
+                </div>
+                <div class="card-note-item">
+                  <span class="card-note-tag">結び目</span>
+                  <p class="card-note-text">知性と衝動、言葉と体温の対峙。言葉を重ねるほどに距離が縮まり、同時に触れてはならない不可侵の領域を確かめ合う引力。</p>
+                </div>
+                <div class="card-note-item">
+                  <span class="card-note-tag">深層</span>
+                  <p class="card-note-text">制約と理性の境界線の中で紡がれる静かな誓い。決して形骸には囚われず、星の配置のように永遠に記憶へ刻まれる絆。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="card-credit">Katasteria Ephemeris Engine · Reverse Horoscope</span>
+        <span class="card-glyphs">☉ ☽ ☿ ♀ ♂ ♃ ♄ ♅ ♆ ♇</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
