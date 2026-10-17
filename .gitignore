@@ -19,3 +19,9 @@ yarn-error.log*
 # エディタ設定
 .vscode/
 .idea/
+
+# 開発・実験用プレビュー
+preview-*.html
+
+# 開発構想メモ・内部ドキュメント
+docs/
